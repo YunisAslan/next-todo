@@ -1,5 +1,5 @@
 import Todo from "@/components/Todo";
-import { fetchTodo } from "@/lib/fetchTodo";
+import { getTodo } from "@/lib/getTodo";
 import { notFound } from "next/navigation";
 
 export const revalidate = 0;
@@ -10,12 +10,16 @@ type Props = {
   };
 };
 
-export default async function OneTodo({ params: { todoId } }: Props) {
-  const todo = await fetchTodo(todoId);
+async function TodoDetail({ params: { todoId } }: Props) {
+  const todo = await getTodo(todoId);
 
-  if (!todo) notFound();
-  console.log("todo", todo);
-  
+  if (!todo?.id) notFound();
 
-  return <Todo {...todo} />;
+  return (
+    <>
+      <Todo {...todo} />
+    </>
+  );
 }
+
+export default TodoDetail;

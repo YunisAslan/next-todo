@@ -2,15 +2,14 @@
   "todos": [
     {
       "userId": 1,
-      "title": "Corek al",
-      "id": 2,
-      "completed": false
+      "title": "Make the best",
+      "id": 1,
+      "completed": true
     },
     {
       "userId": 1,
-      "title": "tyler",
-      "id": 5,
-      "completed": false
+      "title": "Complete Network",
+      "id": 2
     }
   ]
 }

@@ -3,14 +3,24 @@
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-function AddTodo() {
-  const initState: Partial<Todo> = {
-    userId: 1,
-    title: "",
-  };
+const initState: Partial<Todo> = {
+  userId: 1,
+  title: "",
+};
 
-  const [data, setData] = useState(initState);
+function AddTodo() {
+  
   const router = useRouter()
+  const [data, setData] = useState(initState);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+
+    setData((prev) => ({
+      ...prev,
+      [name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,47 +32,34 @@ function AddTodo() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        userId,
-        title,
-      }),
+      body: JSON.stringify({ userId, title }),
     });
 
     await res.json();
 
-    setData((prevValue) => ({
-      ...prevValue,
+    setData((prev) => ({
+      ...prev,
       title: "",
     }));
 
     router.refresh()
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
-
-    setData((prevValue) => ({
-      ...prevValue,
-      [name]: e.target.value,
-    }));
-  };
-
   return (
-    <form
-      action=""
-      className="flex gap-2 justify-center"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex justify-center items-center gap-3" action="" onSubmit={handleSubmit}>
       <input
-        className="p-1 border-gray-400 rounded-md focus:border-blue-500 border outline-none"
+        className="p-2 rounded outline-none focus:border-green-500 border border-gray-400"
         type="text"
         name="title"
         value={data.title}
         onChange={handleChange}
       />
 
-      <button className="text-white bg-blue-500 uppercase text-sm px-2 py-1 rounded-md">
-        Add
+      <button
+        type="submit"
+        className="uppercase bg-green-500 px-2 py-1 text-white rounded"
+      >
+        add
       </button>
     </form>
   );

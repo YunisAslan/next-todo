@@ -1,15 +1,18 @@
-import { fetchTodos } from "@/lib/fetchTodos";
+import { getTodos } from "@/lib/getTodos";
 import Todo from "./Todo";
 
-export default async function TodoList() {
-  const todos = await fetchTodos();
-  const sortedTodos = todos.reverse();
+async function TodoList() {
+
+  const todos = await getTodos();
+  
 
   return (
     <>
-      {sortedTodos.map((todo) => {
-        return <Todo {...todo} key={todo.id} />;
+      {todos.map((todo) => {
+        return <Todo {...todo}/>
       })}
     </>
   );
 }
+
+export default TodoList;
