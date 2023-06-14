@@ -2,14 +2,9 @@
   "todos": [
     {
       "userId": 1,
-      "title": "Make the best",
+      "title": "Qaluboy",
       "id": 1,
       "completed": true
-    },
-    {
-      "userId": 1,
-      "title": "You can do it, man :)",
-      "id": 2
     }
   ]
 }
